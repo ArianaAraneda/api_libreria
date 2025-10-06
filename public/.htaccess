@@ -1,0 +1,16 @@
+# Activa el motor de reescritura de Apache
+RewriteEngine On
+
+# Define la ruta base desde la cual se aplicarán las reglas
+RewriteBase /api_libreria/public/
+
+# Condición: solo aplica la regla si la URL solicitada NO es un archivo real
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# Condición: solo aplica la regla si la URL solicitada NO es un directorio real
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Redirige todas las solicitudes que no sean archivos ni directorios a index.php
+# QSA → conserva los parámetros de la URL (query string)
+# L → indica que es la última regla que se aplica si coincide
+RewriteRule ^ index.php [QSA,L]
